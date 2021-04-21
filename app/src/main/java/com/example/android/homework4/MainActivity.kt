@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val bundle = intent.getExtras()
+        if (bundle != null){
+            dreamViewModel.deleteById(bundle.getInt("id"))
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         buttonLog = binding.buttonAddDream

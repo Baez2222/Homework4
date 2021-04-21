@@ -41,18 +41,23 @@ class DetailedActivity: AppCompatActivity() {
 
 
         dreamViewModel.getDream(id).observe(this, Observer {
-            textView_dTitle.text = it.title
-            textView_dEmotion.text = it.emotion
-            textView_dHappened.text = it.content
-            textView_dInterpretation.text = it.reflection
+            if (it != null){
+                textView_dTitle.text = it.title
+                textView_dEmotion.text = it.emotion
+                textView_dHappened.text = it.content
+                textView_dInterpretation.text = it.reflection
 
-            dreamInfo = arrayOf(it.id.toString(), it.title, it.emotion, it.content, it.reflection)
+                dreamInfo = arrayOf(it.id.toString(), it.title, it.emotion, it.content, it.reflection)
+            }
 
         })
 
         button_delete.setOnClickListener {
-            dreamViewModel.deleteById(id)
-            super.onBackPressed()
+//            dreamViewModel.deleteById(id)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+//            finish()
         }
         
         button_update.setOnClickListener { 
